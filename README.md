@@ -9,5 +9,5 @@ We are building a scheduling assistant for Elizabethtown college’s course plan
 Python, scheduling algorithms, data parsing, constraint optimization, Github collaboration
 
 ### Client
-Our Client is [name] with Elizabethtown College who manages and helps schedule courses.
+Our Client is Jennifer McFadden with Elizabethtown College who manages and helps schedule courses.
 
