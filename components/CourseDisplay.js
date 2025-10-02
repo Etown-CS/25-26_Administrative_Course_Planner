@@ -66,7 +66,7 @@ function CourseDisplay() {
     {
     title: "Computer Science I",
     ID: 121,
-    Semesters: "fall","spring",
+    Semesters: ["fall","spring"],
     compengRequired: true,
     csRequired: true,
     engRequired: false,
