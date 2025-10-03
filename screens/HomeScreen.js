@@ -6,6 +6,7 @@ export default function HomeScreen() {
     return (
     <View style={styles.container}>
 
+<<<<<<< HEAD
     {/* this is where i put the header box */}
     <View style={styles.header}>
     </View>
@@ -39,10 +40,17 @@ export default function HomeScreen() {
         <Text style={styles.generateTitle}>GENERATE</Text>
     </View>
 
+=======
+{/*<this is where i put the header box>*/}
+
+      <Text style={styles.title}>Make a Schedule</Text>
+      <Text style={styles.subtitle}>Use the drop down menu to select which best works for you to generate.</Text>
+>>>>>>> 13bebfb (the title and text)
     </View>
   );
 }
 
+<<<<<<< HEAD
 
 const styles = StyleSheet.create({
 
@@ -56,18 +64,28 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     },
 
+=======
+const styles = StyleSheet.create({
+>>>>>>> 13bebfb (the title and text)
   container: {
     flex: 1,
     justifyContent: 'flex-start', 
     alignItems: 'flex-start',  
+<<<<<<< HEAD
     backgroundColor: 'hsla(0, 0%, 100%, 1.00)',
 
+=======
+>>>>>>> 13bebfb (the title and text)
   },
 
   title: {
     fontSize: 28,
     fontWeight: 'bold',
+<<<<<<< HEAD
     marginTop: 20,
+=======
+    marginTop: 100,
+>>>>>>> 13bebfb (the title and text)
     marginLeft: 20,
     color: '#333',
   },
@@ -80,6 +98,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
     marginLeft: 20,
   },
+<<<<<<< HEAD
 
     year: {
     width: '20%',
@@ -168,3 +187,6 @@ const styles = StyleSheet.create({
     },
 
 });
+=======
+});
+>>>>>>> 13bebfb (the title and text)
