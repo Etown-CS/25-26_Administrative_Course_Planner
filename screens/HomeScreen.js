@@ -16,6 +16,7 @@ export default function HomeScreen() {
       <Text style={styles.subtitle}>Use the drop down menu to select which best works for you to generate.
       </Text>
     
+<<<<<<< HEAD
     {/* this is the year box */}
     <View style={styles.year}>
         <Text style={styles.yearTitle}>Year</Text>
@@ -58,6 +59,8 @@ export default function HomeScreen() {
       </Text>
     
 
+=======
+>>>>>>> 3cabb8d (added generate button interface)
     {/* this is the year box */}
     <View style={styles.year}>
         <Text style={styles.yearTitle}>Year</Text>
@@ -73,6 +76,15 @@ export default function HomeScreen() {
         <Text style={styles.concentrationTitle}>Concentration</Text>
     </View>
 
+    {/* this is the bottom circle */}
+    <View style={styles.halfCircle}>
+        <Text style={styles.halfCircle}></Text>
+    </View>
+
+    {/* this is the generate circle */}
+    <View style={styles.generate}>
+        <Text style={styles.generateTitle}>GENERATE</Text>
+    </View>
 
 >>>>>>> 8b5843b (adding year area)
     </View>
@@ -112,10 +124,15 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start', 
     alignItems: 'flex-start',  
 <<<<<<< HEAD
+<<<<<<< HEAD
     backgroundColor: 'hsla(0, 0%, 100%, 1.00)',
 
 =======
 >>>>>>> 13bebfb (the title and text)
+=======
+    backgroundColor: 'hsla(0, 0%, 100%, 1.00)',
+
+>>>>>>> 3cabb8d (added generate button interface)
   },
 
   title: {
@@ -199,8 +216,39 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 5,
     fontSize: 20,
-    }
+    },
 
+    generate: {
+    width: '40%',
+    height: 30,
+    borderRadius: 20,
+    marginTop: 350,
+    marginLeft: 117,
+    backgroundColor: '#031d52ff',
+    shadowColor: '#000',
+    },
+    
+    generateTitle: {
+    color: '#fff',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginTop: 5,
+    fontSize: 20,
+    },
+
+    halfCircle: {
+    position: 'absolute',
+    bottom: 0,
+    left: '0%',
+    width: 390, 
+    height: 100,
+    backgroundColor: '#3498db',
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20, 
+    borderTopLeftRadius: 100,
+    borderTopRightRadius: 100,
+    
+    },
 
 
 
