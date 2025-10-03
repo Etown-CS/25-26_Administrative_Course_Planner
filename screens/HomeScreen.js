@@ -1,6 +1,10 @@
 import React from 'react';
 import { TextInput, View, Text, Alert, StyleSheet } from "react-native";
-import { useState } from "react";
+//import Dropdown from 'react-bootstrap/Dropdown';
+//import DropdownButton from 'react-bootstrap/DropdownButton';
+//import { Picker } from '@react-native-picker/picker';
+//import { useState } from "react";
+
 
 export default function HomeScreen() {
     return (
@@ -20,6 +24,7 @@ export default function HomeScreen() {
     {/* this is the year box */}
     <View style={styles.year}>
         <Text style={styles.yearTitle}>Year</Text>
+
     </View>
 
     {/* this is the major box */}
