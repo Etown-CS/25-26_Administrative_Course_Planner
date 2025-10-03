@@ -1,5 +1,6 @@
 import { TextInput, View, Text, Alert, StyleSheet } from "react-native";
 import { useState } from "react";
+import Login from "../components/Login";
 
 function LoginScreen({ navigation }) {
   const [username, setUsername] = useState("");
@@ -17,21 +18,7 @@ function LoginScreen({ navigation }) {
     };
 
     return (
-        <View style={styles.container}>
-            <Text styles={styles.title}>Enter Your Username and Password Below</Text>
-            <TextInput 
-                placeholder="Username"
-                value={username}
-                onChangeText={setUsername}
-                style={styles.logininput}
-            />
-            <TextInput
-                placeholder="Password"
-                value={password}
-                onChangeText={setPassword}
-                style={styles.logininput}
-            />
-        </View>
+        <Login></Login>
     );
 
 }
