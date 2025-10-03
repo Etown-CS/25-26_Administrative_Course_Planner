@@ -7,6 +7,7 @@ export default function HomeScreen() {
     <View style={styles.container}>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     {/* this is where i put the header box */}
     <View style={styles.header}>
     </View>
@@ -42,11 +43,29 @@ export default function HomeScreen() {
 
 =======
 {/*<this is where i put the header box>*/}
+=======
+    {/* this is where i put the header box */}
+>>>>>>> 8b5843b (adding year area)
     <View style={styles.header}>
     </View>
+
       <Text style={styles.title}>Make a Schedule</Text>
+<<<<<<< HEAD
       <Text style={styles.subtitle}>Use the drop down menu to select which best works for you to generate.</Text>
 >>>>>>> 13bebfb (the title and text)
+=======
+      <Text style={styles.subtitle}>Use the drop down menu to select which best works for you to generate.
+      </Text>
+    
+
+    {/* this is the year box */}
+    <View style={styles.year}>
+        <Text style={styles.yearTitle}>Year</Text>
+        
+
+    </View>
+
+>>>>>>> 8b5843b (adding year area)
     </View>
   );
 }
@@ -69,6 +88,7 @@ const styles = StyleSheet.create({
     },
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 const styles = StyleSheet.create({
 >>>>>>> 13bebfb (the title and text)
@@ -76,6 +96,8 @@ const styles = StyleSheet.create({
 
 
 >>>>>>> 288fd44 (adding blue box to top of page)
+=======
+>>>>>>> 8b5843b (adding year area)
   container: {
     flex: 1,
     justifyContent: 'flex-start', 
@@ -91,10 +113,14 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: 'bold',
 <<<<<<< HEAD
+<<<<<<< HEAD
     marginTop: 20,
 =======
     marginTop: 100,
 >>>>>>> 13bebfb (the title and text)
+=======
+    marginTop: 20,
+>>>>>>> 8b5843b (adding year area)
     marginLeft: 20,
     color: '#333',
   },
@@ -108,6 +134,9 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 8b5843b (adding year area)
 
     year: {
     width: '20%',
@@ -125,6 +154,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 5,
     fontSize: 20,
+<<<<<<< HEAD
     },
 
     major: {
@@ -199,3 +229,12 @@ const styles = StyleSheet.create({
 =======
 });
 >>>>>>> 13bebfb (the title and text)
+=======
+    }
+
+
+
+
+
+});
+>>>>>>> 8b5843b (adding year area)
