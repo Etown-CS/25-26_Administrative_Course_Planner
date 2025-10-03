@@ -2,6 +2,7 @@ import TimeTable from '@mikezzb/react-native-timetable';
 
 // ...
 
+//This is FAKE code and will NOT be implemented in the final product. -Laney
 <TimeTable
   events={[
   {

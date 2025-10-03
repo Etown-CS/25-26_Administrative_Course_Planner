@@ -1,3 +1,4 @@
+// This page is a WORK IN PROGRESS!!! 
 // src/components/CourseDisplay.js
 import React, { useState, useEffect } from 'react';
 import { collection, getDocs } from 'firebase/firestore'; // Import Firestore functions

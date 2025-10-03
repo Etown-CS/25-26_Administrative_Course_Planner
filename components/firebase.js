@@ -1,3 +1,4 @@
+//This page is to import firebase to JavaScript and the configuration - Laney
 import{initializeApp} from 'firebase/app';
 import {getFirestore} from 'firebase/firestore';
 
