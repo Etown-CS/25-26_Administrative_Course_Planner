@@ -61,9 +61,18 @@ export default function HomeScreen() {
     {/* this is the year box */}
     <View style={styles.year}>
         <Text style={styles.yearTitle}>Year</Text>
-        
-
     </View>
+
+    {/* this is the major box */}
+    <View style={styles.major}>
+        <Text style={styles.majorTitle}>Major</Text>
+    </View>
+
+    {/* this is the concentration box */}
+    <View style={styles.concentration}>
+        <Text style={styles.concentrationTitle}>Concentration</Text>
+    </View>
+
 
 >>>>>>> 8b5843b (adding year area)
     </View>
@@ -154,7 +163,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 5,
     fontSize: 20,
-<<<<<<< HEAD
     },
 
     major: {
@@ -191,45 +199,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 5,
     fontSize: 20,
-    },
-
-    generate: {
-    width: '40%',
-    height: 30,
-    borderRadius: 20,
-    marginTop: 350,
-    marginLeft: 117,
-    backgroundColor: '#031d52ff',
-    shadowColor: '#000',
-    },
-    
-    generateTitle: {
-    color: '#fff',
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginTop: 5,
-    fontSize: 20,
-    },
-
-    halfCircle: {
-    position: 'absolute',
-    bottom: 0,
-    left: '0%',
-    width: 390, 
-    height: 100,
-    backgroundColor: '#3498db',
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20, 
-    borderTopLeftRadius: 100,
-    borderTopRightRadius: 100,
-    
-    },
-
-});
-=======
-});
->>>>>>> 13bebfb (the title and text)
-=======
     }
 
 
@@ -237,4 +206,3 @@ const styles = StyleSheet.create({
 
 
 });
->>>>>>> 8b5843b (adding year area)
