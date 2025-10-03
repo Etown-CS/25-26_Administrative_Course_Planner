@@ -11,3 +11,8 @@ Python, scheduling algorithms, data parsing, constraint optimization, Github col
 ### Client
 Our Client is Jennifer McFadden with Elizabethtown College who manages and helps schedule courses.
 
+## Installation and Setup:
+1. git clone the project into your local terminal
+2. Install Dependencies Install all required packages: "npm install"
+3. Start Expo Go on your phone and type in "npm start" into your terminal.
+4. Scan the QR code that shows up in your terminal
