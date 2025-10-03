@@ -42,7 +42,8 @@ export default function HomeScreen() {
 
 =======
 {/*<this is where i put the header box>*/}
-
+    <View style={styles.header}>
+    </View>
       <Text style={styles.title}>Make a Schedule</Text>
       <Text style={styles.subtitle}>Use the drop down menu to select which best works for you to generate.</Text>
 >>>>>>> 13bebfb (the title and text)
@@ -51,6 +52,9 @@ export default function HomeScreen() {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 288fd44 (adding blue box to top of page)
 
 const styles = StyleSheet.create({
 
@@ -64,9 +68,14 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     },
 
+<<<<<<< HEAD
 =======
 const styles = StyleSheet.create({
 >>>>>>> 13bebfb (the title and text)
+=======
+
+
+>>>>>>> 288fd44 (adding blue box to top of page)
   container: {
     flex: 1,
     justifyContent: 'flex-start', 
