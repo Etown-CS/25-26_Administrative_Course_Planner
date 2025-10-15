@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#013d95',
-    borderRadius: 1,
+    borderRadius: 10,
     shadowColor: '#000',
   },
   title: {
