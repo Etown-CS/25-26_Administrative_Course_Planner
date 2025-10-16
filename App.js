@@ -6,7 +6,6 @@ import CoursePlannerScreen  from './screens/CoursePlannerScreen';
 //import CoursePlannerScreen from './screens/CoursePlannerScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
