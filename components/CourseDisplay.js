@@ -1,102 +1,116 @@
-// This page is a WORK IN PROGRESS!!! 
 // src/components/CourseDisplay.js
 import React, { useState, useEffect } from 'react';
-import { collection, getDocs } from 'firebase/firestore'; // Import Firestore functions
-import { db } from '../firebase'; // <--- Import your initialized Firestore instance
+import { collection, getDocs, orderBy, query } from 'firebase/firestore'; // Import necessary Firestore functions
+import { db } from '../firebase'; // Import your initialized Firestore instance
 
 function CourseDisplay() {
-  // 1. State to hold your course data
+  // State to hold your course data
   const [courses, setCourses] = useState([]);
-  // Optional: State for loading status and errors
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  // NEW: State to hold your assignment data
+  const [assignments, setAssignments] = useState([]);
 
-  // 2. useEffect hook to fetch data when the component mounts
+  // Optional: Loading and error states for both data types
+  const [loadingCourses, setLoadingCourses] = useState(true);
+  const [loadingAssignments, setLoadingAssignments] = useState(true);
+  const [errorCourses, setErrorCourses] = useState(null);
+  const [errorAssignments, setErrorAssignments] = useState(null);
+
+  // useEffect to fetch courses data
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        // Reference to your 'courses' collection in Firestore
         const coursesCollectionRef = collection(db, 'courses');
-
-        // Get all documents from the 'courses' collection
         const querySnapshot = await getDocs(coursesCollectionRef);
-
-        // Map the documents into an array of JavaScript objects
         const coursesData = querySnapshot.docs.map(doc => ({
-          id: doc.id,         // Get the document's ID
-          ...doc.data()       // Get all the fields (name, description, etc.)
+          id: doc.id,
+          ...doc.data()
         }));
-
-        // Update the component's state with the fetched data
         setCourses(coursesData);
       } catch (err) {
         console.error("Error fetching courses:", err);
-        setError("Failed to load courses.");
+        setErrorCourses("Failed to load courses.");
       } finally {
-        setLoading(false); // Set loading to false once fetching is complete (or failed)
+        setLoadingCourses(false);
       }
     };
 
-    fetchCourses(); // Call the async function
-  }, []); // The empty dependency array [] means this effect runs only once after the initial render
+    fetchCourses();
+  }, []); // Runs once on mount
 
-  // 3. Render your component based on the fetched data and loading/error status
-  if (loading) {
-    return <p>Loading courses...</p>;
+  // NEW: useEffect to fetch assignments data
+  useEffect(() => {
+    const fetchAssignments = async () => {
+      try {
+        // Reference to your 'assignments' collection
+        const assignmentsCollectionRef = collection(db, 'assignments');
+        // Optional: order assignments, e.g., by dueDate
+        const q = query(assignmentsCollectionRef, orderBy('dueDate', 'asc'));
+        const querySnapshot = await getDocs(q);
+
+        // Map the documents into an array of JavaScript objects
+        const assignmentsData = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+
+        setAssignments(assignmentsData); // Update state with fetched assignments
+      } catch (err) {
+        console.error("Error fetching assignments:", err);
+        setErrorAssignments("Failed to load assignments.");
+      } finally {
+        setLoadingAssignments(false);
+      }
+    };
+
+    fetchAssignments();
+  }, []); // Runs once on mount
+
+  // Render logic
+  if (loadingCourses || loadingAssignments) {
+    return <p>Loading data...</p>;
   }
 
-  if (error) {
-    return <p style={{ color: 'red' }}>Error: {error}</p>;
+  if (errorCourses || errorAssignments) {
+    return (
+      <div>
+        {errorCourses && <p style={{ color: 'red' }}>Error: {errorCourses}</p>}
+        {errorAssignments && <p style={{ color: 'red' }}>Error: {errorAssignments}</p>}
+      </div>
+    );
   }
-
-  const Assignments =[
-    {title: "Computer Science I",
-    ID: 121,
-    Semesters: "fall, spring",
-    compengRequired: true,
-    csRequired: true,
-    engRequired: false,
-    infosysRequired: true,
-    concentration: false,
-    core: true,
-    credits: 4,
-    grade: "first-year, sophomore",
-    workType: "in-person",
-    prerequisites: "none",
-    },
-    {
-    title: "Computer Science I",
-    ID: 121,
-    Semesters: ["fall","spring"],
-    compengRequired: true,
-    csRequired: true,
-    engRequired: false,
-    infosysRequired: true,
-    concentration: false,
-    core: true,
-    credits: 4,
-    grade: "first-year, sophomore",
-    workType: "in-person",
-    prerequisites: "none",
-    }
-  ]
 
   return (
     <div>
-      <h1>Available Courses</h1>
+      <h1>Our Courses</h1>
       {courses.length === 0 ? (
-        <p>No courses found in the database.</p>
+        <p>No courses available yet.</p>
       ) : (
         <ul>
           {courses.map(course => (
             <li key={course.id}>
               <h2>{course.name}</h2>
               <p>{course.description}</p>
-              {/* Example of displaying the prerequisite IDs (if they exist) */}
               {course.prerequisite && course.prerequisite.length > 0 && (
                 <p>Prerequisites: {course.prerequisite.map(prereqRef => prereqRef.id).join(', ')}</p>
-                // Remember: prereqRef is a DocumentReference. To get names, you'd need another fetch.
               )}
+            </li>
+          ))}
+        </ul>
+      )}
+
+      <hr /> {/* Separator */}
+
+      <h1>Current Assignments</h1>
+      {assignments.length === 0 ? (
+        <p>No assignments found.</p>
+      ) : (
+        <ul>
+          {assignments.map(assignment => (
+            <li key={assignment.id}>
+              <h3>{assignment.title} (Course: {assignment.course})</h3>
+              <p>{assignment.description}</p>
+              <p>Due: {assignment.dueDate?.toDate().toLocaleDateString() || 'N/A'}</p> {/* Handle Timestamp conversion */}
+              <p>Status: {assignment.status}</p>
             </li>
           ))}
         </ul>
