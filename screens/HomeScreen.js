@@ -1,10 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import DropDownPicker from 'react-native-dropdown-picker';
 
 export default function HomeScreen() {
+  // Year dropdown
+  const [openYear, setOpenYear] = useState(false);
+  const [valueYear, setValueYear] = useState('Freshman');
+  const [itemsYear, setItemsYear] = useState([
+    { label: '2026', value: 'Senior' },
+    { label: '2027', value: 'Junior' },
+    { label: '2028', value: 'Sophomore' },
+    { label: '2029', value: 'Freshman' },
+  ]);
+
+  // Major dropdown
+  const [openMajor, setOpenMajor] = useState(false);
+  const [valueMajor, setValueMajor] = useState('Computer Science');
+  const [itemsMajor, setItemsMajor] = useState([
+    { label: 'Computer Science', value: 'Computer Science' },
+  ]);
+
+  // Concentration dropdown
+  const [openConcentration, setOpenConcentration] = useState(false);
+  const [valueConcentration, setValueConcentration] = useState('Hardware');
+  const [itemsConcentration, setItemsConcentration] = useState([
+    { label: 'Hardware', value: 'Hardware' },
+    { label: 'Cybersecurity', value: 'Cybersecurity' },
+    { label: 'Software Development', value: 'Software Engineering' },
+    { label: 'Web & Application Design', value: 'Design' },
+    { label: 'Artificial Intelligence & Data Science', value: 'AI' },
+  ]);
+
   return (
     <View style={styles.container}>
-      {/* Header box */}
+      {/* Header */}
       <View style={styles.header}></View>
 
       <Text style={styles.title}>Make a Schedule</Text>
@@ -12,19 +41,61 @@ export default function HomeScreen() {
         Use the drop down menu to select which best works for you to generate.
       </Text>
 
-      {/* Year box */}
-      <View style={styles.year}>
-        <Text style={styles.yearTitle}>Year</Text>
+      {/* Year dropdown */}
+      <View style={[styles.dropdownWrapper, { zIndex: 3000 }]}>
+        <View style={styles.labelBubble}>
+          <Text style={styles.label}>Year</Text>
+        </View>
+        <DropDownPicker
+          open={openYear}
+          value={valueYear}
+          items={itemsYear}
+          setOpen={setOpenYear}
+          setValue={setValueYear}
+          setItems={setItemsYear}
+          placeholder="Select year"
+          listMode="SCROLLVIEW"
+          style={styles.dropdown}
+          dropDownContainerStyle={[styles.dropDownContainer, { zIndex: 4000 }]}
+        />
       </View>
 
-      {/* Major box */}
-      <View style={styles.major}>
-        <Text style={styles.majorTitle}>Major</Text>
+      {/* Major dropdown */}
+      <View style={[styles.dropdownWrapper, { zIndex: 2000 }]}>
+        <View style={styles.labelBubble}>
+          <Text style={styles.label}>Major</Text>
+        </View>
+        <DropDownPicker
+          open={openMajor}
+          value={valueMajor}
+          items={itemsMajor}
+          setOpen={setOpenMajor}
+          setValue={setValueMajor}
+          setItems={setItemsMajor}
+          placeholder="Select major"
+          listMode="SCROLLVIEW"
+          style={styles.dropdown}
+          dropDownContainerStyle={[styles.dropDownContainer, { zIndex: 3000 }]}
+        />
       </View>
 
-      {/* Concentration box */}
-      <View style={styles.concentration}>
-        <Text style={styles.concentrationTitle}>Concentration</Text>
+      {/* Concentration dropdown */}
+      <View style={[styles.dropdownWrapper, { zIndex: 1000 }]}>
+        <View style={styles.labelBubble}>
+          <Text style={styles.label}>Concentration</Text>
+        </View>
+        <DropDownPicker
+          open={openConcentration}
+          value={valueConcentration}
+          items={itemsConcentration}
+          setOpen={setOpenConcentration}
+          setValue={setValueConcentration}
+          setItems={setItemsConcentration}
+          placeholder="Select concentration"
+          listMode="SCROLLVIEW"
+          style={styles.dropdown}
+          dropDownContainerStyle={[styles.dropDownContainer, { zIndex: 2000 }]}
+        />
       </View>
 
       {/* Bottom half circle */}
@@ -69,56 +140,37 @@ const styles = StyleSheet.create({
     marginTop: 5,
     marginLeft: 20,
   },
-  year: {
-    width: '20%',
-    height: 30,
-    borderRadius: 20,
-    marginTop: 20,
-    marginLeft: 20,
+  dropdownWrapper: {
+    width: '100%',
+    paddingHorizontal: 20,
+    marginTop: 16,
+  },
+  labelBubble: {
+    alignSelf: 'flex-start',
     backgroundColor: '#c70202',
-  },
-  yearTitle: {
-    color: '#fff',
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginTop: 5,
-    fontSize: 20,
-  },
-  major: {
-    width: '20%',
-    height: 30,
     borderRadius: 20,
-    marginTop: 20,
-    marginLeft: 20,
-    backgroundColor: '#c70202',
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+    marginBottom: 6,
   },
-  majorTitle: {
+  label: {
+    fontSize: 16,
     color: '#fff',
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginTop: 5,
-    fontSize: 20,
+    fontWeight: '600',
   },
-  concentration: {
-    width: '40%',
-    height: 30,
-    borderRadius: 20,
-    marginTop: 20,
-    marginLeft: 20,
-    backgroundColor: '#c70202',
+  dropdown: {
+    borderColor: '#ddd',
+    backgroundColor: '#fff',
   },
-  concentrationTitle: {
-    color: '#fff',
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginTop: 5,
-    fontSize: 20,
+  dropDownContainer: {
+    borderColor: '#ddd',
+    backgroundColor: '#fff',
   },
   generate: {
     width: '40%',
     height: 30,
     borderRadius: 20,
-    marginTop: 350,
+    marginTop: 300,
     marginLeft: 117,
     backgroundColor: '#031d52',
   },
