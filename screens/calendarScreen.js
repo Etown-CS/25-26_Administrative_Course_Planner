@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Alert } from "react-native";
 import { Calendar } from 'react-native-calendars';
 import TimeTable from '@mikezzb/react-native-timetable';
 
-export default function CalendarScreen({ route }) {
+export function CalendarScreen({ route }) {
   const { year, major, concentration } = route.params || {};
 
   return (
@@ -26,6 +26,7 @@ export default function CalendarScreen({ route }) {
       {/* Timetable section */}
       <View style={styles.timetableBox}>
         <TimeTable
+        // This is HARD CODE as an example, not a part of the final product.
           events={[
             {
               courseId: 'CS121',
@@ -70,3 +71,5 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
 });
+
+export default CalendarScreen;
