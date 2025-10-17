@@ -9,11 +9,8 @@ export function CalendarScreen({ route }) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Your Schedule</Text>
-      <Text style={styles.info}>Year: {year}</Text>
-      <Text style={styles.info}>Major: {major}</Text>
-      <Text style={styles.info}>Concentration: {concentration}</Text>
 
-      {/* Calendar section */}
+      {/* Calendar section: 1 week prospective calendar*/}
       <View style={styles.calendarBox}>
         <Calendar
           onDayPress={day => console.log('selected day', day)}
@@ -27,19 +24,26 @@ export function CalendarScreen({ route }) {
       <View style={styles.timetableBox}>
         <TimeTable
         // This is HARD CODE as an example, not a part of the final product.
-          events={[
-            {
-              courseId: 'CS121',
-              title: 'Computer Science 1',
-              section: 'A - LEC',
-              day: 3,
-              startTime: '14:30',
-              endTime: '16:15',
-              location: 'Esbenshade 184',
-              color: 'rgba(241,153,40,1)',
-              professor: 'Dr. Wang',
+        eventGroups={[
+          {
+            courseId: 'CSCI2100',
+            title: 'Data Structures',
+            sections: {
+              'A - LEC': {
+                days: [1, 3],
+                startTimes: ['16:30', '14:30'],
+                endTimes: ['17:15', '16:15'],
+                locations: ['Online Teaching', 'Online Teaching'],
+              },
+              'AT02 - TUT': {
+                days: [4],
+                startTimes: ['17:30'],
+                endTimes: ['18:15'],
+                locations: ['Online Teaching'],
+              },
             },
-          ]}
+          },
+        ]}
           eventOnPress={(event) => Alert.alert(`${JSON.stringify(event)}`)}
         />
       </View>
