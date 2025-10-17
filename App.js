@@ -1,11 +1,12 @@
 import HomeScreen from './screens/HomeScreen';
 //import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import  LoginScreen  from './screens/LoginScreen';
-import CoursePlannerScreen  from './screens/CoursePlannerScreen';
+//import  LoginScreen  from './screens/LoginScreen';
+
 //import CoursePlannerScreen from './screens/CoursePlannerScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import CalendarScreen from './screens/calendarScreen';
 
 
 
@@ -15,8 +16,10 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen}
-        options={{headerShown:false}} />
+        <Stack.Screen name="Home" component={HomeScreen} />
+        {/* <Stack.Screen name="CoursePlanner" component={HomeScreen} /> */}
+        <Stack.Screen name="CalendarScreen" component={CalendarScreen} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );
