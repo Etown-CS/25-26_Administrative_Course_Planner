@@ -66,9 +66,9 @@ Currently we are still under development and are not ready for deployment to the
 
 # Authors
 
-Parker Engle, 
-Laney Humble, laneyeh@yahoo.com
-Aya Zourgani,
+- Parker Engle, 
+- Laney Humble, laneyeh@yahoo.com
+- Aya Zourgani,
 
 
 
