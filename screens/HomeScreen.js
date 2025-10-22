@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
+import { useNavigation } from '@react-navigation/native';
 
 export default function HomeScreen() {
+  const navigation = useNavigation();
   // Year dropdown
   const [openYear, setOpenYear] = useState(false);
   const [valueYear, setValueYear] = useState('Freshman');
@@ -102,9 +104,15 @@ export default function HomeScreen() {
       <View style={styles.halfCircle}></View>
 
       {/* Generate button */}
+      <Pressable onPress={() => navigation.navigate('CalenderScreen', {
+        year: valueYear,
+        major: valueMajor,
+        concentration: valueConcentration,
+      })}>
       <View style={styles.generate}>
         <Text style={styles.generateTitle}>GENERATE</Text>
       </View>
+      </Pressable>
     </View>
   );
 }
