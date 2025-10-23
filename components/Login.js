@@ -7,7 +7,6 @@ const Login = () => {
 
   return (
             <View style={styles.container}>
-            <Text styles={styles.title}>Enter Your Username and Password Below</Text>
             <TextInput 
                 placeholder="Username"
                 value={username}
@@ -34,14 +33,10 @@ export default Login;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'top',
+        justifyContent: 'flex-start',
         padding: 20,
-    },
-    title: {
-        fontSize: 30,
-        fontWeight: 'bold',
-        marginBottom: 20,
-        textAlign: 'center',
+        paddingTop: 40,
+        backgroundColor: '#fff',
     },
     logininput: {
         height: 40,
