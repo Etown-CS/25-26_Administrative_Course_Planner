@@ -6,9 +6,6 @@ function LoginScreen({ navigation }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-
-
-
     const handleLogin = () => {
         if (username === "admin" && password === "password") {
             navigation.navigate("CoursePlanner");
@@ -24,10 +21,7 @@ return (
     <Text style={styles.logintext}>Login</Text>
     <Login />
   </View>
-);
-
-    
-
+  );
 }
 
 export default LoginScreen;
@@ -56,8 +50,8 @@ const styles = StyleSheet.create({
         fontStyle: 'normal',
         fontWeight: '900',
         lineHeight: 41.5,
-        marginTop: 210,
-        marginBottom: 20,
+        marginTop: 300,
+        marginBottom: 5,
   },
     subtitle: {
         color: '#3DB5E6',
@@ -77,9 +71,8 @@ const styles = StyleSheet.create({
         fontWeight: '800',
         lineHeight: 32,
         marginTop: 40,
-        marginBottom: 8,
         alignSelf: 'flex-start',
-        marginLeft: 30,
+        marginLeft: 35,
   },
     logininput: {
         height: 40,
@@ -87,6 +80,5 @@ const styles = StyleSheet.create({
         borderWidth: 1, 
         marginBottom: 10, 
         paddingLeft: 8,
-    }
-
+    },
 });
