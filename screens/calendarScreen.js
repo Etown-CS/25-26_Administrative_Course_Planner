@@ -4,76 +4,95 @@ import TimeTable from '@mikezzb/react-native-timetable';
 
 export function CalendarScreen({ route }) {
   const { year, major, concentration } = route.params || {};
-  
-  // Get the current day and week days
-  const today = new Date();
-  const [selectedDay, setSelectedDay] = useState(today.getDay()); // 0 = Sunday
 
-  // Generate the next 7 days (not a specific week)
-  const daysOfWeek = Array.from({ length: 7 }, (_, i) => {
-    const date = new Date(today);
-    date.setDate(today.getDate() - today.getDay() + i); // adjust to start from Sunday
-    return {
-      label: date.toLocaleDateString('en-US', { weekday: 'short' }), // "Sun", "Mon", etc.
-      date: date.toISOString().split('T')[0], // "2025-10-21"
-    };
-  });
+  // Show only Monday through Friday
+  const daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
+  const dayIndexes = [1, 2, 3, 4, 5]; // JS Date.getDay() mapping
+
+  // Default to today if Mon–Fri, otherwise Monday
+  const today = new Date();
+  const initialDayIndex = dayIndexes.includes(today.getDay()) ? today.getDay() : 1;
+  const [selectedDay, setSelectedDay] = useState(initialDayIndex);
+
+  // Sample timetable data
+  const allEvents = [
+    {
+      courseId: 'CS121',
+      title: 'Computer Science 1',
+      sections: {
+        'Computer Science 1': {
+          days: [1, 3], // Mon & Wed
+          startTimes: ['16:30', '14:30'],
+          endTimes: ['17:15', '16:15'],
+          locations: ['In Person'],
+        },
+        'AT02 - TUT': {
+          days: [4], // Thu
+          startTimes: ['17:30'],
+          endTimes: ['18:15'],
+          locations: ['Online'],
+        },
+      },
+    },
+  ];
+
+  // Filter events for selected day
+  const filteredEvents = allEvents
+    .map(event => ({
+      ...event,
+      sections: Object.fromEntries(
+        Object.entries(event.sections).filter(
+          ([, section]) => section.days.includes(selectedDay)
+        )
+      ),
+    }))
+    .filter(event => Object.keys(event.sections).length > 0);
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Your Schedule</Text>
 
-      {/* 7-day Week Strip */}
+      {/* Mon–Fri header (no numbers) */}
       <View style={styles.weekStrip}>
-        {daysOfWeek.map((day, index) => (
-          <TouchableOpacity
-            key={index}
-            style={[
-              styles.dayButton,
-              selectedDay === index && styles.selectedDayButton,
-            ]}
-            onPress={() => {
-              setSelectedDay(index);
-              console.log('Selected:', day.date);
-            }}
-          >
-            <Text
+        {daysOfWeek.map((label, index) => {
+          const actualDay = dayIndexes[index];
+          return (
+            <TouchableOpacity
+              key={index}
               style={[
-                styles.dayLabel,
-                selectedDay === index && styles.selectedDayLabel,
+                styles.dayButton,
+                selectedDay === actualDay && styles.selectedDayButton,
               ]}
+              onPress={() => setSelectedDay(actualDay)}
             >
-              {day.label}
-            </Text>
-          </TouchableOpacity>
-        ))}
+              <Text
+                style={[
+                  styles.dayLabel,
+                  selectedDay === actualDay && styles.selectedDayLabel,
+                ]}
+              >
+                {label}
+              </Text>
+            </TouchableOpacity>
+          );
+        })}
       </View>
 
-      {/* Timetable section */}
+      {/* Timetable */}
       <View style={styles.timetableBox}>
-        <TimeTable
-          eventGroups={[
-            {
-              courseId: 'CSCI2100',
-              title: 'Data Structures',
-              sections: {
-                'A - LEC': {
-                  days: [1, 3],
-                  startTimes: ['16:30', '14:30'],
-                  endTimes: ['17:15', '16:15'],
-                  locations: ['Online Teaching', 'Online Teaching'],
-                },
-                'AT02 - TUT': {
-                  days: [4],
-                  startTimes: ['17:30'],
-                  endTimes: ['18:15'],
-                  locations: ['Online Teaching'],
-                },
-              },
-            },
-          ]}
-          eventOnPress={(event) => Alert.alert(`${JSON.stringify(event)}`)}
-        />
+        {filteredEvents.length > 0 ? (
+          <TimeTable
+            eventGroups={filteredEvents}
+            eventOnPress={(event) => Alert.alert(`${JSON.stringify(event)}`)}
+            // Hide weekday numbers and dates
+            showHeader={false} 
+            hideDateHeader={true} 
+          />
+        ) : (
+          <Text style={styles.noEventsText}>
+            No classes scheduled for {daysOfWeek[dayIndexes.indexOf(selectedDay)]}.
+          </Text>
+        )}
       </View>
     </View>
   );
@@ -101,7 +120,7 @@ const styles = StyleSheet.create({
   },
   dayButton: {
     paddingVertical: 8,
-    paddingHorizontal: 10,
+    paddingHorizontal: 12,
     borderRadius: 8,
   },
   selectedDayButton: {
@@ -117,6 +136,12 @@ const styles = StyleSheet.create({
   },
   timetableBox: {
     flex: 1,
+    marginTop: 20,
+  },
+  noEventsText: {
+    textAlign: 'center',
+    fontSize: 16,
+    color: '#888',
     marginTop: 20,
   },
 });
