@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { useNavigation } from '@react-navigation/native';
-import CalendarScreen from './calendarScreen';
+import CalendarScreen from './screens/calendarScreen';
+import DropTitle from '../components/DropTitle';
 
 export default function HomeScreen({navigation}) {
   // const navigation = useNavigation();
@@ -46,9 +47,7 @@ export default function HomeScreen({navigation}) {
 
       {/* Year dropdown */}
       <View style={[styles.dropdownWrapper, { zIndex: 3000 }]}>
-        <View style={styles.labelBubble}>
-          <Text style={styles.label}>Year</Text>
-        </View>
+        <DropTitle>Year</DropTitle>
         <DropDownPicker
           open={openYear}
           value={valueYear}
@@ -65,9 +64,7 @@ export default function HomeScreen({navigation}) {
 
       {/* Major dropdown */}
       <View style={[styles.dropdownWrapper, { zIndex: 2000 }]}>
-        <View style={styles.labelBubble}>
-          <Text style={styles.label}>Major</Text>
-        </View>
+        <DropTitle>Major</DropTitle>
         <DropDownPicker
           open={openMajor}
           value={valueMajor}
@@ -84,9 +81,7 @@ export default function HomeScreen({navigation}) {
 
       {/* Concentration dropdown */}
       <View style={[styles.dropdownWrapper, { zIndex: 1000 }]}>
-        <View style={styles.labelBubble}>
-          <Text style={styles.label}>Concentration</Text>
-        </View>
+        <DropTitle>Concentration</DropTitle>
         <DropDownPicker
           open={openConcentration}
           value={valueConcentration}
