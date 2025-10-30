@@ -17,8 +17,10 @@ function LoginScreen({ navigation }) {
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
         <Image
-          source = {require('../assets/nestlogo.png')}
+          source={require('../assets/nestlogo.png')}
           style={styles.overlayImage}
+          pointerEvents="none"
+          resizeMode="contain"
         />
       <Text style={styles.title}>The Nest Planner!</Text>
       <Text style={styles.subtitle}>Ready to take Flight!</Text>
@@ -44,7 +46,7 @@ const styles = StyleSheet.create({
     fontSize: 40,
     fontWeight: '900',
     lineHeight: 41.5,
-    marginTop: 300,
+    marginTop: 340,
     marginBottom: 5,
   },
   subtitle: {
@@ -63,7 +65,7 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     fontWeight: '800',
     lineHeight: 32,
-    marginTop: 40,
+    marginTop: 20,
     alignSelf: 'flex-start',
     marginLeft: 35,
   },
@@ -73,5 +75,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 10,
     paddingLeft: 8,
+  },
+  overlayImage: {
+    position: 'absolute',
+    top: 150,
+    right: 120,
+    width: 155,
+    height: 155,
+    zIndex: 9999,
   },
 });
