@@ -6,7 +6,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import CalendarScreen from './screens/calendarScreen';
-import Login from './components/Login';
+// import Login from './components/Login';
 
 
 

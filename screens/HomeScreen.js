@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { useNavigation } from '@react-navigation/native';
-import CalendarScreen from './screens/calendarScreen';
+import CalendarScreen from './calendarScreen';
 import DropTitle from '../components/DropTitle';
 
 export default function HomeScreen({navigation}) {
