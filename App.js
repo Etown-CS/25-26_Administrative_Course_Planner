@@ -1,7 +1,8 @@
 import HomeScreen from './screens/HomeScreen';
 import { StyleSheet, Text, View } from 'react-native';
+//import CoursePlannerScreen  from './screens/CoursePlannerScreen'; removed for now for mine to work
 //import  LoginScreen  from './screens/LoginScreen';   uncomment when login is finished
-
+import  LoginScreen  from './screens/LoginScreen';
 //import CoursePlannerScreen from './screens/CoursePlannerScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -15,7 +16,9 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen name="Login" component={LoginScreen}
+        options={{headerShown:false}} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="CalendarScreen" component={CalendarScreen} />
         {/* <Stack.Screen name="LoginScreen" component={LoginScreen} /> */}
@@ -25,11 +28,6 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
+
+
