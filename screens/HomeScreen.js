@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import  { useState } from 'react';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
+import { useNavigation } from '@react-navigation/native';
+import CalendarScreen from './calendarScreen';
+import DropTitle from '../components/DropTitle';
 
-export default function HomeScreen() {
+export default function HomeScreen({navigation}) {
+  // const navigation = useNavigation();
   // Year dropdown
   const [openYear, setOpenYear] = useState(false);
   const [valueYear, setValueYear] = useState('Freshman');
@@ -43,9 +47,7 @@ export default function HomeScreen() {
 
       {/* Year dropdown */}
       <View style={[styles.dropdownWrapper, { zIndex: 3000 }]}>
-        <View style={styles.labelBubble}>
-          <Text style={styles.label}>Year</Text>
-        </View>
+        <DropTitle>Year</DropTitle>
         <DropDownPicker
           open={openYear}
           value={valueYear}
@@ -62,9 +64,7 @@ export default function HomeScreen() {
 
       {/* Major dropdown */}
       <View style={[styles.dropdownWrapper, { zIndex: 2000 }]}>
-        <View style={styles.labelBubble}>
-          <Text style={styles.label}>Major</Text>
-        </View>
+        <DropTitle>Major</DropTitle>
         <DropDownPicker
           open={openMajor}
           value={valueMajor}
@@ -81,9 +81,7 @@ export default function HomeScreen() {
 
       {/* Concentration dropdown */}
       <View style={[styles.dropdownWrapper, { zIndex: 1000 }]}>
-        <View style={styles.labelBubble}>
-          <Text style={styles.label}>Concentration</Text>
-        </View>
+        <DropTitle>Concentration</DropTitle>
         <DropDownPicker
           open={openConcentration}
           value={valueConcentration}
@@ -102,9 +100,15 @@ export default function HomeScreen() {
       <View style={styles.halfCircle}></View>
 
       {/* Generate button */}
+      <Pressable onPress={() => navigation.navigate('CalendarScreen', {
+        year: valueYear,
+        major: valueMajor,
+        concentration: valueConcentration,
+      })}>
       <View style={styles.generate}>
         <Text style={styles.generateTitle}>GENERATE</Text>
       </View>
+      </Pressable>
     </View>
   );
 }
@@ -175,7 +179,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#031d52',
   },
   generateTitle: {
-    color: '#fff',
+    color: '#ffffffff',
     fontWeight: 'bold',
     textAlign: 'center',
     marginTop: 5,
