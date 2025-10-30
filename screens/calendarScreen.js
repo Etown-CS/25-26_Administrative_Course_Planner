@@ -1,72 +1,61 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Modal} from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Modal } from "react-native";
 
 const classData = [
-  { title: "Computer Science I", id: "CS121", location: "Esbenshade 281", day: ["Mon", "Wed", "Fri"], time: "11:00", color: "#FFD166",},
-  { title: "Calculus I", id: "MA121", location: "Nicarry 124", day: ["Mon", "Wed", "Fri"], time: "9:30", color: "#06D6A0",},
-  { title: "Software Engineering", id: "CS341", location: "CS Lounge", day: ["Tue", "Thu"], time: "9:30", color: "#119AB2", },
+  { title: "Computer Science I", id: "CS121", location: "Esbenshade 281", day: ["Mon", "Wed", "Fri"], time: "11:00", color: "#FFD166" },
+  { title: "Calculus I", id: "MA121", location: "Nicarry 124", day: ["Mon", "Wed", "Fri"], time: "9:30", color: "#06D6A0" },
+  { title: "Software Engineering", id: "CS341", location: "CS Lounge", day: ["Tue", "Thu"], time: "9:30", color: "#119AB2" },
 ];
 
 export function CalendarScreen() {
-  const [selectedDay, setSelectedDay] = useState("Mon");
   const [selectedClass, setSelectedClass] = useState(null);
 
-  // Define time slots
+  const days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
   const timeSlots = ["8:00", "9:30", "11:00", "12:30", "2:00"];
 
-  // Filter events by selected day (supports multiple days per class)
-  const filteredClasses = classData.filter((c) => c.day.includes(selectedDay));
+  // Helper to get event for a day and time
+  const getEvent = (day, time) => classData.find((c) => c.day.includes(day) && c.time === time);
 
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Weekly Schedule</Text>
 
-      {/* Day Selector */}
-      <View style={styles.daySelector}>
-        {["Mon", "Tue", "Wed", "Thu", "Fri"].map((day) => (
-          <TouchableOpacity
-            key={day}
-            style={[
-              styles.dayButton,
-              selectedDay === day && styles.dayButtonSelected,
-            ]}
-            onPress={() => setSelectedDay(day)}
-          >
-            <Text
-              style={[
-                styles.dayText,
-                selectedDay === day && styles.dayTextSelected,
-              ]}
-            >
-            {day}
-            </Text>
-          </TouchableOpacity>
+      {/* Table Header (Days of Week) */}
+      <View style={styles.tableHeader}>
+        <View style={styles.timeColumnHeader} />
+        {days.map((day) => (
+          <Text key={day} style={styles.dayHeaderText}>{day}</Text>
         ))}
       </View>
 
-     {/* Timetable */}
-     <ScrollView style={styles.scrollContainer}>
-        {timeSlots.map((time) => {
-          const event = filteredClasses.find((c) => c.time === time);
-          return (
-            <View key={time} style={styles.row}>
-              <Text style={styles.timeText}>{time}</Text>
-              <View style={styles.eventBox}>
-                {event ? (
-                  <TouchableOpacity
-                    style={[styles.event, { backgroundColor: event.color }]}
-                    onPress={() => setSelectedClass(event)}
-                  >
-                    <Text style={styles.eventTitle}>{event.id}</Text>
-                    <Text style={styles.eventLocation}>{event.location}</Text>
-                  </TouchableOpacity>
-                ) : (
-                  <View style={styles.emptySlot} />
-                )}
-              </View>
-            </View>
-          );
-        })}
+      {/* Timetable Grid */}
+      <ScrollView style={styles.scrollContainer}>
+        {timeSlots.map((time) => (
+          <View key={time} style={styles.row}>
+            {/* Time Column */}
+            <Text style={styles.timeText}>{time}</Text>
+
+            {/* Day Columns */}
+            {days.map((day) => {
+              const event = getEvent(day, time);
+              return (
+                <View key={day} style={styles.eventBox}>
+                  {event ? (
+                    <TouchableOpacity
+                      style={[styles.event, { backgroundColor: event.color }]}
+                      onPress={() => setSelectedClass(event)}
+                    >
+                      <Text style={styles.eventTitle}>{event.title}</Text>
+                      <Text style={styles.eventLocation}>{event.location}</Text>
+                    </TouchableOpacity>
+                  ) : (
+                    <View style={styles.emptySlot} />
+                  )}
+                </View>
+              );
+            })}
+          </View>
+        ))}
       </ScrollView>
 
       {/* Modal for Class Info */}
@@ -103,77 +92,72 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingHorizontal: 16,
+    paddingHorizontal: 10,
     paddingTop: 40,
   },
   header: {
     fontSize: 26,
     fontWeight: "bold",
-    marginBottom: 20,
+    marginBottom: 10,
     textAlign: "center",
-  },
-  daySelector: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 20,
-    backgroundColor: "#f1f1f1",
-    borderRadius: 12,
-    padding: 6,
-  },
-  dayButton: {
-    paddingVertical: 8,
-    paddingHorizontal: 14,
-    borderRadius: 8,
-  },
-  dayButtonSelected: {
-    backgroundColor: "#007bff",
-  },
-  dayText: {
-    fontSize: 16,
-    color: "#333",
-    fontWeight: "500",
-  },
-  dayTextSelected: {
-    color: "#fff",
   },
   scrollContainer: {
     flex: 1,
   },
+  tableHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 10,
+    paddingRight: 8,
+  },
+  timeColumnHeader: {
+    width: 50,
+  },
+  dayHeaderText: {
+    flex: 1,
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 16,
+    color: "#333",
+  },
   row: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 12,
+    marginBottom: 8,
   },
   timeText: {
-    width: 60,
-    fontSize: 15,
+    width: 50,
+    fontSize: 14,
     color: "#444",
   },
   eventBox: {
     flex: 1,
-    height: 45,
-    justifyContent: "center",
+    height: 55,
+    marginHorizontal: 2,
     backgroundColor: "#f8f8f8",
     borderRadius: 10,
-    paddingHorizontal: 10,
+    justifyContent: "center",
+    alignItems: "center",
   },
   event: {
-    padding: 8,
-    borderRadius: 8,
+    width: "100%",
+    height: "100%",
+    borderRadius: 10,
+    justifyContent: "center",
+    alignItems: "center",
   },
   eventTitle: {
     fontWeight: "bold",
     color: "#333",
   },
   eventLocation: {
-    fontSize: 12,
+    fontSize: 11,
     color: "#333",
   },
   emptySlot: {
     height: "100%",
+    width: "100%",
   },
-
-  // Modal Styles
   modalOverlay: {
     flex: 1,
     backgroundColor: "rgba(0,0,0,0.4)",
@@ -181,7 +165,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   modalBox: {
-    width: "80%",
+    width: "95%",
     backgroundColor: "#fff",
     borderRadius: 12,
     padding: 20,
