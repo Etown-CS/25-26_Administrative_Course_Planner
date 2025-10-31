@@ -1,9 +1,15 @@
 import {Text, View, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
-import { useState } from 'react';
 
-const Login = () => {
+
+const Login = ({onLogin}) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+
+    const handleLogin = () => {
+        onLogin(username, password);
+
+
+    }
 
     return (
         <View style={styles.container}>
@@ -25,7 +31,7 @@ const Login = () => {
 
             <View style={styles.submitWrapper}>
                 <View style={styles.redBubble} pointerEvents="none" />
-                <TouchableOpacity style={styles.submitButton} onPress={() => { /* placeholder */ }}>
+                <TouchableOpacity style={styles.submitButton} onPress={handleLogin}>
                     <Text style={styles.submitText}>Submit</Text>
                 </TouchableOpacity>
             </View>
