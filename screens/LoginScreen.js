@@ -5,9 +5,10 @@ import Login from "../components/Login";
 function LoginScreen({ navigation }) {
 
 
-  const handleLogin = ({username, password}) => {
+  const handleLogin = (username, password) => {
+    // console.log(username, password);        here for testing purposes
     if (username === "admin" && password === "password") {
-      navigation.navigate("CoursePlanner");
+      navigation.navigate("Home");
     } else {
       Alert.alert("Invalid credentials", "Please try again.");
     }
