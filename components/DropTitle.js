@@ -1,13 +1,14 @@
 import { View, Text } from "react-native";
 import { StyleSheet } from "react-native";
 
-function DropTitle({title}){
+function DropTitle({ title, children }){
+  const labelText = children ?? title;
 
-    return(
-        <View style={styles.labelBubble}>
-                  <Text style={styles.label}>{title}</Text>
-        </View>
-    );
+  return(
+    <View style={styles.labelBubble}>
+          <Text style={styles.label}>{labelText}</Text>
+    </View>
+  );
 }
 export default DropTitle;
 

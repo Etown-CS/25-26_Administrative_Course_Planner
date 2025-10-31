@@ -1,5 +1,5 @@
 import  { useState } from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Pressable, Dimensions } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { useNavigation } from '@react-navigation/native';
 import CalendarScreen from './calendarScreen';
@@ -100,15 +100,17 @@ export default function HomeScreen({navigation}) {
       <View style={styles.halfCircle}></View>
 
       {/* Generate button */}
-      <Pressable onPress={() => navigation.navigate('CalendarScreen', {
-        year: valueYear,
-        major: valueMajor,
-        concentration: valueConcentration,
-      })}>
-      <View style={styles.generate}>
-        <Text style={styles.generateTitle}>GENERATE</Text>
+      <View style={styles.generateWrapper} pointerEvents="box-none">
+        <Pressable onPress={() => navigation.navigate('CalendarScreen', {
+          year: valueYear,
+          major: valueMajor,
+          concentration: valueConcentration,
+        })}>
+          <View style={styles.generate}>
+            <Text style={styles.generateTitle}>GENERATE</Text>
+          </View>
+        </Pressable>
       </View>
-      </Pressable>
     </View>
   );
 }
@@ -122,11 +124,11 @@ const styles = StyleSheet.create({
   },
   header: {
     width: '100%',
-    height: 90,
+    height: 50,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#013d95',
-    borderRadius: 10,
+    borderRadius: 0,
     shadowColor: '#000',
   },
   title: {
@@ -171,26 +173,42 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   generate: {
-    width: '40%',
-    height: 30,
-    borderRadius: 20,
-    marginTop: 350,
-    marginLeft: 117,
+    width: 220,
+    height: 56,
+    borderRadius: 28,
     backgroundColor: '#031d52',
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 100000,
+    elevation: 20,
+    // shadow for iOS
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.25,
+    shadowRadius: 8,
+  },
+  generateWrapper: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 50,
+    alignItems: 'center',
+    zIndex: 100000,
+    elevation: 20,
   },
   generateTitle: {
-    color: '#ffffffff',
+    color: '#fff',
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 5,
     fontSize: 20,
+    lineHeight: 22,
   },
   halfCircle: {
     position: 'absolute',
     bottom: 0,
     left: 0,
     width: 390,
-    height: 100,
+    height: 70,
     backgroundColor: '#3498db',
     borderTopLeftRadius: 100,
     borderTopRightRadius: 100,
