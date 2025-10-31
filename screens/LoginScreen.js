@@ -3,10 +3,9 @@ import { TextInput, View, Text, Alert, StyleSheet, Image } from "react-native";
 import Login from "../components/Login";
 
 function LoginScreen({ navigation }) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
+
+  const handleLogin = ({username, password}) => {
     if (username === "admin" && password === "password") {
       navigation.navigate("CoursePlanner");
     } else {
@@ -26,10 +25,6 @@ function LoginScreen({ navigation }) {
       <Text style={styles.subtitle}>Ready to take Flight!</Text>
       <Text style={styles.logintext}>Login</Text>
       <Login
-        username={username}
-        password={password}
-        setUsername={setUsername}
-        setPassword={setPassword}
         onLogin={handleLogin}
       />
     </View>
