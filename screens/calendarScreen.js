@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     paddingTop: 40,
   },
   header: {
-    fontSize: 26,
+    fontSize: 36,
     fontWeight: "bold",
     marginBottom: 10,
     textAlign: "center",
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     flex: 1,
     textAlign: "center",
     fontWeight: "bold",
-    fontSize: 16,
+    fontSize: 20,
     color: "#333",
   },
   row: {
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
   },
   timeText: {
     width: 50,
-    fontSize: 14,
+    fontSize: 16,
     color: "#444",
   },
   eventBox: {
