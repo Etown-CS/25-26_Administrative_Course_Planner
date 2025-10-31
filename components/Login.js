@@ -7,6 +7,7 @@ const Login = ({onLogin}) => {
     const [password, setPassword] = useState("");
 
     const handleLogin = () => {
+        //console.log(username, password); here for testing purposes
         onLogin(username, password);
 
 
