@@ -1,26 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Modal } from "react-native";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { db } from "../components/firebase"; // make sure firebase.js exports 'db'
 
-const classData = [
-  { title: "Computer Science I", id: "CS121", location: "Esbenshade 281", day: ["Mon", "Wed", "Fri"], time: "11:00", color: "#FFD166" },
-  { title: "Calculus I", id: "MA121", location: "Nicarry 124", day: ["Mon", "Wed", "Fri"], time: "9:30", color: "#06D6A0" },
-  { title: "Software Engineering", id: "CS341", location: "CS Lounge", day: ["Tue", "Thu"], time: "9:30", color: "#119AB2" },
-];
-
-export function CalendarScreen() {
+export function CalendarScreen({ year = "Sophomore", major = "CS", concentration = "Software", semester = "Fall" }) {
+  const [classData, setClassData] = useState([]);
   const [selectedClass, setSelectedClass] = useState(null);
 
   const days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
   const timeSlots = ["8:00", "9:30", "11:00", "12:30", "2:00"];
 
-  // Helper to get event for a day and time
-  const getEvent = (day, time) => classData.find((c) => c.day.includes(day) && c.time === time);
+  // ✅ Fetch classes from Firestore
+  useEffect(() => {
+    const fetchClasses = async () => {
+      try {
+        const q = query(
+          collection(db, "classes"),
+          where("major", "==", major),
+          where("concentration", "==", concentration),
+          where("semester", "==", semester)
+        );
+
+        const querySnapshot = await getDocs(q);
+        const fetchedClasses = querySnapshot.docs.map((doc) => doc.data());
+        setClassData(fetchedClasses);
+        console.log("Fetched classes:", fetchedClasses);
+      } catch (error) {
+        console.error("Error fetching classes:", error);
+      }
+    };
+
+    fetchClasses();
+  }, [year, major, concentration, semester]);
+
+  const getEvent = (day, time) =>
+    classData.find((c) => c.day?.includes(day) && c.time === time);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Weekly Schedule</Text>
-
-      {/* Table Header (Days of Week) */}
+      <Text style={styles.header}>Weekly Schedule - {semester} {year}</Text>
       <View style={styles.tableHeader}>
         <View style={styles.timeColumnHeader} />
         {days.map((day) => (
@@ -28,21 +46,17 @@ export function CalendarScreen() {
         ))}
       </View>
 
-      {/* Timetable Grid */}
       <ScrollView style={styles.scrollContainer}>
         {timeSlots.map((time) => (
           <View key={time} style={styles.row}>
-            {/* Time Column */}
             <Text style={styles.timeText}>{time}</Text>
-
-            {/* Day Columns */}
             {days.map((day) => {
               const event = getEvent(day, time);
               return (
                 <View key={day} style={styles.eventBox}>
                   {event ? (
                     <TouchableOpacity
-                      style={[styles.event, { backgroundColor: event.color }]}
+                      style={[styles.event, { backgroundColor: event.color || "#ccc" }]}
                       onPress={() => setSelectedClass(event)}
                     >
                       <Text style={styles.eventTitle}>{event.title}</Text>
@@ -58,7 +72,6 @@ export function CalendarScreen() {
         ))}
       </ScrollView>
 
-      {/* Modal for Class Info */}
       <Modal
         visible={!!selectedClass}
         transparent
@@ -96,7 +109,7 @@ const styles = StyleSheet.create({
     paddingTop: 40,
   },
   header: {
-    fontSize: 36,
+    fontSize: 26,
     fontWeight: "bold",
     marginBottom: 10,
     textAlign: "center",
@@ -117,7 +130,7 @@ const styles = StyleSheet.create({
     flex: 1,
     textAlign: "center",
     fontWeight: "bold",
-    fontSize: 20,
+    fontSize: 16,
     color: "#333",
   },
   row: {
@@ -127,7 +140,7 @@ const styles = StyleSheet.create({
   },
   timeText: {
     width: 50,
-    fontSize: 16,
+    fontSize: 14,
     color: "#444",
   },
   eventBox: {
