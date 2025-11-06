@@ -17,6 +17,15 @@ export default function HomeScreen({navigation}) {
     { label: '2029', value: 'Freshman' },
   ]);
 
+  // Term dropdown
+  const [openTerm, setOpenTerm] = useState(false);
+  const [valueTerm, setValueTerm] = useState('Computer Science');
+  const [itemsTerm, setItemsTerm] = useState([
+    { label: 'Fall', value: 'Fall' },
+    { label: 'Spring', value: 'Spring' },
+    { label: 'Summer', value: 'Summer' },
+  ]);
+
   // Major dropdown
   const [openMajor, setOpenMajor] = useState(false);
   const [valueMajor, setValueMajor] = useState('Computer Science');
@@ -56,6 +65,23 @@ export default function HomeScreen({navigation}) {
           setValue={setValueYear}
           setItems={setItemsYear}
           placeholder="Select year"
+          listMode="SCROLLVIEW"
+          style={styles.dropdown}
+          dropDownContainerStyle={[styles.dropDownContainer, { zIndex: 4000 }]}
+        />
+      </View>
+
+      {/* Term dropdown */}
+      <View style={[styles.dropdownWrapper, { zIndex: 3000 }]}>
+        <DropTitle>Term</DropTitle>
+        <DropDownPicker
+          open={openTerm}
+          value={valueTerm}
+          items={itemsTerm}
+          setOpen={setOpenTerm}
+          setValue={setValueTerm}
+          setItems={setItemsTerm}
+          placeholder="Select term"
           listMode="SCROLLVIEW"
           style={styles.dropdown}
           dropDownContainerStyle={[styles.dropDownContainer, { zIndex: 4000 }]}
@@ -122,19 +148,10 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     backgroundColor: '#fff',
   },
-  header: {
-    width: '100%',
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#013d95',
-    borderRadius: 0,
-    shadowColor: '#000',
-  },
   title: {
     fontSize: 28,
     fontWeight: 'bold',
-    marginTop: 20,
+    marginTop: 35,
     marginLeft: 20,
     color: '#333',
   },
