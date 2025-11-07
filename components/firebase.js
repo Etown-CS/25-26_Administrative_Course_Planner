@@ -1,10 +1,11 @@
 //This page is to import firebase to JavaScript and the configuration - Laney
 import{initializeApp} from 'firebase/app';
 import {getFirestore} from 'firebase/firestore';
-
+require('dotenv').config();
 //This file is to initialize the Firebase SDK and import the db
-const firebaseConfig = {
-    apiKey: 'AIzaSyBby9hnVikBNEMWlP4Mxqvnx42Ga2djNbs',
+const firebaseAPIKEY = process.env.firebaseAPIKEY;
+const firebaseConfig = { 
+    apiKey: firebaseAPIKEY,
     authDomain: "nest-planner.firebaseapp.com",
     projectId: "nest-planner",
     storageBucket: "nest-planner.firebasestorage.app",

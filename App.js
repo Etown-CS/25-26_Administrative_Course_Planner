@@ -4,13 +4,13 @@ import  LoginScreen  from './screens/LoginScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import CalendarScreen from './screens/calendarScreen';
-
+require('dotenv').config();
 
 
 
 export default function App() {
   const Stack = createNativeStackNavigator();
-
+  
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
