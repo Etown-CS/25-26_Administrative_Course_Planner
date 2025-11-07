@@ -184,18 +184,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   eventTitle: {
-    fontWeight: "bold",
-    color: "#ffffffff",
-    fontSize: 9,
+    fontWeight: "700",
+    color: "#fff",
+    fontSize: 12,
     fontFamily: 'Roboto',
-    justifyContent: "center",
-
+    textAlign: 'center',
+    alignSelf: 'center',
   },
   eventLocation: {
-    fontSize: 9,
-    color: "#ffffffff",
+    fontSize: 10,
+    color: "#fff",
     fontFamily: 'Roboto',
-    justifyContent: "center",
+    textAlign: 'center',
+    alignSelf: 'center',
   },
   classData: {
     color: "#ee9595ff",
