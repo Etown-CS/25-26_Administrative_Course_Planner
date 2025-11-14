@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "98058962015",
+    "project_id": "nest-planner",
+    "storage_bucket": "nest-planner.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:98058962015:android:2fe9c61f8ec157f8e8c7ea",
+        "android_client_info": {
+          "package_name": "nest.planner"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-Z2hM-1hthB3r1iX82jOBle_tE3gd0rc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
