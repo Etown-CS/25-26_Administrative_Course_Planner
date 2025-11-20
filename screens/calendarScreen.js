@@ -105,14 +105,36 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingHorizontal: 10,
+    paddingHorizontal: 16,
     paddingTop: 40,
+
   },
   header: {
     fontSize: 26,
     fontWeight: "bold",
-    marginBottom: 10,
     textAlign: "center",
+    color: "#fff",
+    zIndex: 2,
+    position: 'relative',
+    fontFamily: 'Roboto',
+    marginBottom: 50,
+  },
+  headerWrapper: {
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 3,
+    position: 'relative',
+  },
+  headerBubble: {
+    position: 'absolute',
+    width: '80%',
+    left: '10%',
+    height: 50,
+    backgroundColor: '#c70202',
+    borderRadius: 24,
+    top: -8,
+    zIndex: 1,
   },
   scrollContainer: {
     flex: 1,
@@ -120,7 +142,7 @@ const styles = StyleSheet.create({
   tableHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 10,
+    marginBottom: 2,
     paddingRight: 8,
   },
   timeColumnHeader: {
@@ -142,10 +164,12 @@ const styles = StyleSheet.create({
     width: 50,
     fontSize: 14,
     color: "#444",
+    paddingHorizontal: 13,
+    fontFamily: 'Roboto',
   },
   eventBox: {
     flex: 1,
-    height: 55,
+    height: 80,
     marginHorizontal: 2,
     backgroundColor: "#f8f8f8",
     borderRadius: 10,
@@ -161,11 +185,20 @@ const styles = StyleSheet.create({
   },
   eventTitle: {
     fontWeight: "bold",
-    color: "#333",
+    color: "#ffffffff",
+    fontSize: 9,
+    fontFamily: 'Roboto',
+    justifyContent: "center",
+
   },
   eventLocation: {
-    fontSize: 11,
-    color: "#333",
+    fontSize: 9,
+    color: "#ffffffff",
+    fontFamily: 'Roboto',
+    justifyContent: "center",
+  },
+  classData: {
+    color: "#ee9595ff",
   },
   emptySlot: {
     height: "100%",
@@ -192,17 +225,19 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 10,
     textAlign: "center",
+    fontFamily: 'Roboto',
   },
   modalText: {
     fontSize: 15,
     color: "#444",
     marginBottom: 5,
     textAlign: "center",
+    fontFamily: 'Roboto',
   },
   closeButton: {
     marginTop: 15,
     alignSelf: "center",
-    backgroundColor: "#007bff",
+    backgroundColor: "#c70202",
     borderRadius: 8,
     paddingVertical: 8,
     paddingHorizontal: 16,
@@ -210,6 +245,7 @@ const styles = StyleSheet.create({
   closeButtonText: {
     color: "#fff",
     fontWeight: "bold",
+    fontFamily: 'Roboto',
   },
 });
 
