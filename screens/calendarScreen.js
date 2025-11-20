@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 3,
+    marginBottom: -15,
     position: 'relative',
   },
   headerBubble: {
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
   tableHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 2,
+    marginBottom: 5,
     paddingRight: 8,
   },
   timeColumnHeader: {
@@ -170,14 +170,15 @@ const styles = StyleSheet.create({
   eventBox: {
     flex: 1,
     height: 80,
-    marginHorizontal: 2,
+    marginHorizontal: 6,
+    marginVertical: 6,
     backgroundColor: "#f8f8f8",
     borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
   },
   event: {
-    width: "100%",
+    width: "113%",
     height: "100%",
     borderRadius: 10,
     justifyContent: "center",
