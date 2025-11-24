@@ -18,3 +18,6 @@ const app = initializeApp(firebaseConfig);
 //Initialize Cloud Firestore
 const db = getFirestore(app);
 export{db};
+
+//Realtime Database
+const rtdb = admin.darabase(app);
