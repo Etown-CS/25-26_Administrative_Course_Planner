@@ -3,7 +3,7 @@ import{initializeApp} from 'firebase/app';
 //import {getFirestore} from 'firebase/firestore';
 //require('dotenv').config();
 //This file is to initialize the Firebase SDK and import the db
-const firebaseAPIKEY = process.env.firebaseAPIKEY;
+const firebaseAPIKEY = process.env.EXPO_PUBLIC_firebaseAPIKEY;
 const firebaseConfig = { 
     apiKey: firebaseAPIKEY,
     authDomain: "nest-planner.firebaseapp.com",
@@ -17,4 +17,4 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 console.log(app);
 //Initialize Cloud Firestore
-//export const db = getFirestore(app);
+export const db = getFirestore(app);
