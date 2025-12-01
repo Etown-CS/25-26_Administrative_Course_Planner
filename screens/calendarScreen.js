@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Modal } from "react-native";
 import { collection, query, where, getDocs } from "firebase/firestore";
-import { db } from "../components/firebase"; // make sure firebase.js exports 'db'
+import { db } from "../components/connection"; // make sure firebase.js exports 'db'
 
 export function CalendarScreen({ year = "Sophomore", major = "CS", concentration = "Software", semester = "Fall" }) {
   const [classData, setClassData] = useState([]);

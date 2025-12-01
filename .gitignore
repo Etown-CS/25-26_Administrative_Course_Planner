@@ -136,3 +136,8 @@ dist
 
 # Ignore Gradle build output directory
 build
+
+node_modules
+dist
+coverage
+config/serviceAccountKey.json
