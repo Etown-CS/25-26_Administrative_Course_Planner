@@ -137,6 +137,7 @@ dist
 # Ignore Gradle build output directory
 build
 
+# Ignoring service account key file
 node_modules
 dist
 coverage
