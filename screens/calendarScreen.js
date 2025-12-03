@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Modal } from "react-native";
 import { collection, query, where, getDocs } from "firebase/firestore";
-import { db } from "../components/firebase"; // make sure firebase.js exports 'db'
+import { db } from "../components/connection"; // make sure firebase.js exports 'db'
 
 export function CalendarScreen({ year = "Sophomore", major = "CS", concentration = "Software", semester = "Fall" }) {
   const [classData, setClassData] = useState([]);
@@ -105,14 +105,36 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingHorizontal: 10,
+    paddingHorizontal: 16,
     paddingTop: 40,
+
   },
   header: {
     fontSize: 26,
     fontWeight: "bold",
-    marginBottom: 10,
     textAlign: "center",
+    color: "#fff",
+    zIndex: 2,
+    position: 'relative',
+    fontFamily: 'Roboto',
+    marginBottom: 50,
+  },
+  headerWrapper: {
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: -15,
+    position: 'relative',
+  },
+  headerBubble: {
+    position: 'absolute',
+    width: '80%',
+    left: '10%',
+    height: 50,
+    backgroundColor: '#c70202',
+    borderRadius: 24,
+    top: -8,
+    zIndex: 1,
   },
   scrollContainer: {
     flex: 1,
@@ -120,7 +142,7 @@ const styles = StyleSheet.create({
   tableHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 10,
+    marginBottom: 5,
     paddingRight: 8,
   },
   timeColumnHeader: {
@@ -142,30 +164,43 @@ const styles = StyleSheet.create({
     width: 50,
     fontSize: 14,
     color: "#444",
+    paddingHorizontal: 13,
+    fontFamily: 'Roboto',
   },
   eventBox: {
     flex: 1,
-    height: 55,
-    marginHorizontal: 2,
+    height: 80,
+    marginHorizontal: 6,
+    marginVertical: 6,
     backgroundColor: "#f8f8f8",
     borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
   },
   event: {
-    width: "100%",
+    width: "113%",
     height: "100%",
     borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
   },
   eventTitle: {
-    fontWeight: "bold",
-    color: "#333",
+    fontWeight: "700",
+    color: "#fff",
+    fontSize: 12,
+    fontFamily: 'Roboto',
+    textAlign: 'center',
+    alignSelf: 'center',
   },
   eventLocation: {
-    fontSize: 11,
-    color: "#333",
+    fontSize: 10,
+    color: "#fff",
+    fontFamily: 'Roboto',
+    textAlign: 'center',
+    alignSelf: 'center',
+  },
+  classData: {
+    color: "#ee9595ff",
   },
   emptySlot: {
     height: "100%",
@@ -192,17 +227,19 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 10,
     textAlign: "center",
+    fontFamily: 'Roboto',
   },
   modalText: {
     fontSize: 15,
     color: "#444",
     marginBottom: 5,
     textAlign: "center",
+    fontFamily: 'Roboto',
   },
   closeButton: {
     marginTop: 15,
     alignSelf: "center",
-    backgroundColor: "#007bff",
+    backgroundColor: "#c70202",
     borderRadius: 8,
     paddingVertical: 8,
     paddingHorizontal: 16,
@@ -210,6 +247,7 @@ const styles = StyleSheet.create({
   closeButtonText: {
     color: "#fff",
     fontWeight: "bold",
+    fontFamily: 'Roboto',
   },
 });
 
