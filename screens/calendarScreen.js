@@ -1,44 +1,50 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Modal } from "react-native";
-import { collection, query, where, getDocs } from "firebase/firestore";
-import { db } from "../components/connection"; // make sure firebase.js exports 'db'
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Modal, ActivityIndicator } from "react-native";
 
-export function CalendarScreen({ year = "Sophomore", major = "CS", concentration = "Software", semester = "Fall" }) {
-  const [classData, setClassData] = useState([]);
+import {getSchedule} from '../util/firebase_connection';
+
+/** 
+ **** This a sample data structure for the course schedule. ****
+*/
+const[schedule, setSchedule] = useState([]);
+const[loading,setLoading] = useState(true);
+
+const classData = [
+  { title: "Computer Science I", id: "CS121", location: "Esbenshade 281", day: ["Mon", "Wed", "Fri"], time: "11:00", color: "#FFD166" },
+
+  { title: "Software Engineering", id: "CS341", location: "CS Lounge", day: ["Tue", "Thu"], time: "9:30", color: "#119AB2" },
+];
+
+
+export function CalendarScreen({ year=2026, semester="Spring", major="CS" }) {
   const [selectedClass, setSelectedClass] = useState(null);
 
   const days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
   const timeSlots = ["8:00", "9:30", "11:00", "12:30", "2:00"];
 
-  // ✅ Fetch classes from Firestore
+  const fetchSchedule = async () => {
+    // prefer passed props, fall back to defaults
+    setLoading(true);
+    const classes = await getSchedule(year, semester, major);
+    console.log("Fetched classes:", classes);
+    setSchedule(classes);
+  };
+
   useEffect(() => {
-    const fetchClasses = async () => {
-      try {
-        const q = query(
-          collection(db, "classes"),
-          where("major", "==", major),
-          where("concentration", "==", concentration),
-          where("semester", "==", semester)
-        );
+    fetchSchedule();
+  }, [year, semester, major]);
 
-        const querySnapshot = await getDocs(q);
-        const fetchedClasses = querySnapshot.docs.map((doc) => doc.data());
-        setClassData(fetchedClasses);
-        console.log("Fetched classes:", fetchedClasses);
-      } catch (error) {
-        console.error("Error fetching classes:", error);
-      }
-    };
 
-    fetchClasses();
-  }, [year, major, concentration, semester]);
-
-  const getEvent = (day, time) =>
-    classData.find((c) => c.day?.includes(day) && c.time === time);
+  // Helper to get event for a day and time
+  const getEvent = (day, time) => classData.find((c) => 
+    c.day.includes(day) && c.time === time
+);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Weekly Schedule - {semester} {year}</Text>
+      <Text style={styles.header}>Weekly Schedule</Text>
+
+      {/* Table Header (Days of Week) */}
       <View style={styles.tableHeader}>
         <View style={styles.timeColumnHeader} />
         {days.map((day) => (
@@ -46,17 +52,21 @@ export function CalendarScreen({ year = "Sophomore", major = "CS", concentration
         ))}
       </View>
 
+      {/* Timetable Grid */}
       <ScrollView style={styles.scrollContainer}>
         {timeSlots.map((time) => (
           <View key={time} style={styles.row}>
+            {/* Time Column */}
             <Text style={styles.timeText}>{time}</Text>
+
+            {/* Day Columns */}
             {days.map((day) => {
               const event = getEvent(day, time);
               return (
                 <View key={day} style={styles.eventBox}>
                   {event ? (
                     <TouchableOpacity
-                      style={[styles.event, { backgroundColor: event.color || "#ccc" }]}
+                      style={[styles.event, { backgroundColor: event.color }]}
                       onPress={() => setSelectedClass(event)}
                     >
                       <Text style={styles.eventTitle}>{event.title}</Text>
@@ -72,6 +82,7 @@ export function CalendarScreen({ year = "Sophomore", major = "CS", concentration
         ))}
       </ScrollView>
 
+      {/* Modal for Class Info */}
       <Modal
         visible={!!selectedClass}
         transparent
@@ -105,36 +116,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingHorizontal: 16,
+    paddingHorizontal: 10,
     paddingTop: 40,
-
   },
   header: {
     fontSize: 26,
     fontWeight: "bold",
+    marginBottom: 10,
     textAlign: "center",
-    color: "#fff",
-    zIndex: 2,
-    position: 'relative',
-    fontFamily: 'Roboto',
-    marginBottom: 50,
-  },
-  headerWrapper: {
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: -15,
-    position: 'relative',
-  },
-  headerBubble: {
-    position: 'absolute',
-    width: '80%',
-    left: '10%',
-    height: 50,
-    backgroundColor: '#c70202',
-    borderRadius: 24,
-    top: -8,
-    zIndex: 1,
   },
   scrollContainer: {
     flex: 1,
@@ -142,7 +131,7 @@ const styles = StyleSheet.create({
   tableHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 5,
+    marginBottom: 10,
     paddingRight: 8,
   },
   timeColumnHeader: {
@@ -164,43 +153,30 @@ const styles = StyleSheet.create({
     width: 50,
     fontSize: 14,
     color: "#444",
-    paddingHorizontal: 13,
-    fontFamily: 'Roboto',
   },
   eventBox: {
     flex: 1,
-    height: 80,
-    marginHorizontal: 6,
-    marginVertical: 6,
+    height: 55,
+    marginHorizontal: 2,
     backgroundColor: "#f8f8f8",
     borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
   },
   event: {
-    width: "113%",
+    width: "100%",
     height: "100%",
     borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
   },
   eventTitle: {
-    fontWeight: "700",
-    color: "#fff",
-    fontSize: 12,
-    fontFamily: 'Roboto',
-    textAlign: 'center',
-    alignSelf: 'center',
+    fontWeight: "bold",
+    color: "#333",
   },
   eventLocation: {
-    fontSize: 10,
-    color: "#fff",
-    fontFamily: 'Roboto',
-    textAlign: 'center',
-    alignSelf: 'center',
-  },
-  classData: {
-    color: "#ee9595ff",
+    fontSize: 11,
+    color: "#333",
   },
   emptySlot: {
     height: "100%",
@@ -227,19 +203,17 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 10,
     textAlign: "center",
-    fontFamily: 'Roboto',
   },
   modalText: {
     fontSize: 15,
     color: "#444",
     marginBottom: 5,
     textAlign: "center",
-    fontFamily: 'Roboto',
   },
   closeButton: {
     marginTop: 15,
     alignSelf: "center",
-    backgroundColor: "#c70202",
+    backgroundColor: "#007bff",
     borderRadius: 8,
     paddingVertical: 8,
     paddingHorizontal: 16,
@@ -247,7 +221,6 @@ const styles = StyleSheet.create({
   closeButtonText: {
     color: "#fff",
     fontWeight: "bold",
-    fontFamily: 'Roboto',
   },
 });
 
