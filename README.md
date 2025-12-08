@@ -1,8 +1,7 @@
 # The Nest Planner
+The purpose of Nest Planner is to  build a scheduling assistant for Elizabethtown College’s course planning process. The tool will help generate optimized course schedules for the academic year, balancing faculty availability, classroom constraints, and departmental needs.
 
-Parker, Aya, and I are building a scheduling assistant for Elizabethtown College’s course planning process. The tool will help generate optimized course schedules for the academic year, balancing faculty availability, classroom constraints, and departmental needs.
-
-Our users will be the Elizabethtown College Administration, but specifically advisors for the Engineering and Computer Science Department.
+Our users will be the Elizabethtown College Administration and advisors for the Computer Science Department.
 
 ## Tech Stack
 - Google Firebase: Database
@@ -51,7 +50,12 @@ some first-time configuration from the developer, for example: setting up a
 database for running your webapp locally.
 
 ## Running
-1. start the project with
+1. install npm with
+ ```
+npm install
+```
+
+2. start the project with
 ```
 npm start
 ```
