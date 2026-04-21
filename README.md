@@ -7,8 +7,8 @@ Our users will be the Elizabethtown College Administration and advisors for the 
 - Google Firebase: Database
 - JavaScript: Back-end
 - Node.js: Back-end (Run time environment)
-- React: Front-end (for mobile)
-- React Native: Front-end (Transfer to web-based)
+- React Native: Front-end (for mobile)
+- React: Front-end (Transfer to web-based)
 
 
 ## External Requirements
